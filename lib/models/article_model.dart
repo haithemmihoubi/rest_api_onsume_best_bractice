@@ -6,9 +6,10 @@ class Article {
   @JsonKey(defaultValue: 'unKnown')
   final String? author;
   final String? title;
+  @JsonKey(defaultValue: '')
   final String? description;
   final String? url;
-  @JsonKey(name: 'urlToImage')
+  @JsonKey(name: 'urlToImage', defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png')
   final String? imageUrl;
   final String publishedAt;
   final String? content;

@@ -38,6 +38,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   json_annotation:
   http:
+  get:
+  chewie:
+  video_player:
+  appinio_video_player: ^1.2.0
+  shimmer:
+  fade_shimmer: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -9,9 +9,10 @@ part of 'article_model.dart';
 Article _$ArticleFromJson(Map<String, dynamic> json) => Article(
       json['author'] as String? ?? 'unKnown',
       json['title'] as String?,
-      json['description'] as String?,
+      json['description'] as String? ?? '',
       json['url'] as String?,
-      json['urlToImage'] as String?,
+      json['urlToImage'] as String? ??
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png',
       json['publishedAt'] as String,
       json['content'] as String?,
       ArticleSource.fromJson(json['source'] as Map<String, dynamic>),
