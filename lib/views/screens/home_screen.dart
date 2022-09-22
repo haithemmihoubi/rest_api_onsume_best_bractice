@@ -7,7 +7,6 @@ import 'package:video_player/video_player.dart';
 import '../../controller/article_controller.dart';
 
 class HomePage extends StatefulWidget {
-
   HomePage({Key? key}) : super(key: key);
 
   @override
@@ -21,13 +20,46 @@ class _HomePageState extends State<HomePage> {
 
   late CustomVideoPlayerController _customVideoPlayerController;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('News App'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed('/search');
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child:  ListView(
+          children: [
+               DrawerHeader(
+              child: const Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
       ),
       body: FutureBuilder(
         future: articleController.getArticles(),
@@ -35,7 +67,6 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: articleController.articles.length,
-              itemExtent: Get.height ,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onDoubleTap: () {
@@ -54,18 +85,7 @@ class _HomePageState extends State<HomePage> {
                       title: articleController.articles[index].title!,
                       content: Column(
                         children: [
-                          Container(
-                            height: 100,
-                            child: CustomVideoPlayer(
-                                customVideoPlayerController: CustomVideoPlayerController(
-                                  context: context,
-                                  videoPlayerController:  VideoPlayerController.network(
-                                      'https://www.youtube.com/watch?v=W6vAQdzLcu4&ab_channel=RivaanRanawat'),
-                                )),
-                          ),
-
                           Image.network(
-
                               articleController.articles[index].imageUrl!),
                           const Text(
                             'Description',
@@ -85,11 +105,15 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Card(
                     margin: const EdgeInsets.all(10),
-
                     child: Column(
                       children: [
                         Text(
-                            "Source ${articleController.articles[index].source.name!}"),
+                          "Source ${articleController.articles[index].source.name!}",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
                         Image.network(
                           articleController.articles[index].imageUrl!,
                         ),
@@ -115,8 +139,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )
                             : Container(),
-                        Text(
-                            "Content ${articleController.articles[index].content!}"),
+                        articleController.articles[index].content!=null?Text(
+                            "Content ${articleController.articles[index].content!}"): Container(),
                       ],
                     ),
                   ),
@@ -124,20 +148,20 @@ class _HomePageState extends State<HomePage> {
               },
             );
           } else {
-            return  Center(child: SizedBox(
+            return Center(
+                child: SizedBox(
               width: 200.0,
               height: 100.0,
               child: Shimmer.fromColors(
                 baseColor: Colors.red,
                 highlightColor: Colors.yellow,
                 enabled: true,
-                child: Text(
+                child: const Text(
                   'Loading ...',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40.0,
-                    fontWeight:
-                    FontWeight.bold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
