@@ -29,36 +29,28 @@ class ArticleController extends GetxController {
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
       // debugPrint("responseJson -----> $responseJson",wrapWidth: 1024);
-      logger.i(responseJson);
+      // logger.i(responseJson);
       for (var item in responseJson['articles']) {
         articles.add(Article.fromJson(item));
       }
       //articles.addAll( await responseJson['articles']);
       return articles;
     } else {
-      logger.e('Failed to load articles');
+      // logger.e('Failed to load articles');
      throw Exception('Failed to load articles');
 
     }
   }
+  // getArticles by category
+Future? getArticlesByCategrory({String category = 'business'}) {
+  final  _url =
+      'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=e4821d3ee9104b98baf8b0a7099934ef';
+
+
+
+
 }
 
-/*
-class DioClient {
-  define the base url
-  static const baseUrl="https://jsonplaceholder.typicode.com";
-  // define the post Endpoint
-  static const postsEndpoint="/posts";
-  Future getPosts() async {
-    try {
-      // final response = await Dio().get(baseUrl+postEndpoint);
-     //  debugPrint("response -----> $response",wrapWidth: 1024);
-    //  return Post.fromJSon(response.data) ;
-    } on DioError catch (e) {
-      debugPrint("error -----> $e",wrapWidth: 1024);
-      throw Exception() e;
-
-  }
+}
 
 
-}*/

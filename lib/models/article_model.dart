@@ -18,8 +18,17 @@ class Article {
   Article(this.author, this.title, this.description, this.url, this.imageUrl,
       this.publishedAt, this.content, this.source);
 
-  factory Article.fromJson(Map<String, dynamic> json) => _$ArticleFromJson(json);
-  Map<String, dynamic> toJson() => _$ArticleToJson(this);
+Article.fromJson(Map<String, dynamic> json)
+      : author = json['author'],
+        title = json['title'],
+        description = json['description'],
+        url = json['url'],
+        imageUrl = json['urlToImage'],
+        publishedAt = json['publishedAt'],
+        content = json['content'],
+        source = ArticleSource.fromJson(json['source']);
+
+
 }
 //? serializing the sourcea in the article
 @JsonSerializable()

@@ -45,6 +45,9 @@ dependencies:
   shimmer:
   fade_shimmer: ^2.0.1
   logger: ^1.1.0
+  flex_color_scheme: ^6.0.1
+  dio:
+  impeller: ^0.0.1
 
 dev_dependencies:
   flutter_test:

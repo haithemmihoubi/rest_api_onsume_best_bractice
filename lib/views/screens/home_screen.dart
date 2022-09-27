@@ -1,6 +1,7 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rest_api_onsume_best_bractice/views/screens/products_screen.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('News App'),
@@ -45,17 +47,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: const Text('Item 1'),
+              title: const Text('Product'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Get.to(ProductScreen()) ;
               },
             ),
             ListTile(
               title: const Text('Item 2'),
               onTap: () {
-                // Update the state of the app.
-                // ...
               },
             ),
           ],
@@ -77,10 +76,11 @@ class _HomePageState extends State<HomePage> {
                     /* Get.to(() => const Material(child: const Center(child: Text("data")),color: Colors.red, ),
                     transition: Transition.fadeIn,
                       duration: const Duration(seconds: 3),
-                      curve: Curves.easeInCirc,
+                      curve: Curves.easeInCircle,
                     );*/
                   },
                   onTap: () {
+
                     Get.defaultDialog(
                       title: articleController.articles[index].title!,
                       content: Column(
