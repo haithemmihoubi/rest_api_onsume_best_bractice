@@ -16,24 +16,46 @@ class ProductController extends GetxController {
       final response = await dio.get('https://fakestoreapi.com/products/$id');
       if (response.statusCode == 200) {
         product = Product.fromJson(response.data);
-        logger.i(product);
+        //logger.i(product);
         return product;
       }
       } on DioError catch (e) {
       product = null;
       if (e.response != null) {
-        logger.w('Dio error!');
+       /* logger.w('Dio error!');
         logger.w('STATUS: ${e.response?.statusCode}');
         logger.w('DATA: ${e.response?.data}');
-        logger.w('HEADERS: ${e.response?.headers}');
+        logger.w('HEADERS: ${e.response?.headers}');*/
       } else {
         // Error due to setting up or sending the request
 
-        logger.wtf(e.message);
+       // logger.wtf(e.message);
       }
     }
     return product ;
   }
+  var ListOfProducts = <Product>[].obs;
+  Future getAllPruducts() async {
+    final response = await dio.get('https://fakestoreapi.com/products');
+    try {
+      if (response.statusCode == 200) {
+        ListOfProducts.value =
+            (response.data as List).map((e) => Product.fromJson(e)).toList();
+        logger.i(ListOfProducts);
+        return ListOfProducts;
+      }
 
+    }
+    on DioError catch (e) {
+      if (e.response != null) {
+        logger.wtf('Dio error whiole fetching products list  !');
+        logger.w('STATUS code : ${e.response?.statusCode}');
+        logger.w('DATA  from the error  : ${e.response?.data}');
+        logger.w('HEADERS of the request: ${e.response?.headers}');
+      }
+      logger.w(" error while fetching products list   ${e.message}") ;
+
+    }
+  }
 
 }

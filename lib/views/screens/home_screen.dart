@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../controller/article_controller.dart';
+import 'all_the_products.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -53,8 +54,9 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('All teh products'),
               onTap: () {
+                Get.to(()=>AllProducts()) ;
               },
             ),
           ],

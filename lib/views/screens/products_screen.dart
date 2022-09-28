@@ -10,13 +10,13 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productContrroller = Get.put(ProductController());
+    final productController = Get.put(ProductController());
     return Scaffold(
       appBar:  AppBar(
         title: const Text('Product Screen'),
       ),
       body: FutureBuilder(
-        future: productContrroller.getProductById(1),
+        future: productController.getProductById(1),
         builder: (context, snapshot) {
          return  ProductComponent(product: snapshot.data as Product);
         },
