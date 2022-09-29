@@ -49,6 +49,7 @@ dependencies:
   dio:
   impeller: ^0.0.1
   simple_connection_checker: ^0.2.1
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

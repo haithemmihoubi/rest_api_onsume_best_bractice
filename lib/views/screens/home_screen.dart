@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../controller/article_controller.dart';
+import '../../controller/product_controller.dart';
 import 'all_the_products.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,10 +25,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+final productController = Get.put(ProductController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('News App'),
+        title:Text('Home Page'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -171,6 +172,7 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
+
     );
   }
 }

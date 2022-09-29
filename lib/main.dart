@@ -10,7 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 void main() async {
-  await initServices();
+ /* await initServices();*/
   runApp(MyApp());
 }
 // initializing all the services which has to be running in the background always using getx
@@ -19,21 +19,23 @@ void main() async {
   /// Here is where you put get_storage, hive, shared_pref initialization.
   /// or moor connection, or whatever that's async.
   await Get.putAsync(() => InternetConnected().checkInternetConnection());
- final InternetConnected internetConnected = Get.put(InternetConnected());
-  print('internet connection status ${internetConnected._isConnected}');
+  InternetConnected internetConnected = Get.putAsync(()=>InternetConnected().checkInternetConnection()) as InternetConnected;
+  final isConnected = await internetConnected.._isConnected;
+  print('thisbis the status of the initernet connect ion  $isConnected');
+
   print('All services started for this application...');
 }
 // initializing all the controllers which has to be running in the background always using getx
 class InternetConnected extends GetxService  {
 
   var _isConnected =  true.obs;
-
+// initializing the internet connection checker
   @override
   void onInit() {
     SimpleConnectionChecker.isConnectedToInternet();
     super.onInit();
   }
-
+// function to check the internet connection
   Future<bool> checkInternetConnection() async {
     _isConnected.value = await SimpleConnectionChecker.isConnectedToInternet();
     return _isConnected.value;

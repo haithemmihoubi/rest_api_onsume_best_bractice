@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 import '../models/product.dart';
 import '../networking/dio_networking.dart';
@@ -8,7 +9,18 @@ import '../networking/dio_networking.dart';
 class ProductController extends GetxController {
   // initialize logger nd teh dio client class
   final Dio dio = Dio();
+  RxBool internetConnection = true.obs;
 
+  // initialize the  internet connection function
+  void isInternetConnected() async {
+    internetConnection.value = await SimpleConnectionChecker.isConnectedToInternet();
+  }
+// on ninit function to ninitialize all the  services
+  @override
+  void onInit() {
+    isInternetConnected();
+    super.onInit();
+  }
   var logger = Logger();
   Future getProductById(int id) async {
     Product? product ;
